@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,persistencejs) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -20,9 +20,15 @@ angular.module('starter.controllers', [])
   $scope.login = function() {
     $scope.modal.show();
   };
-
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
+
+    for ( var i = 0; i < 5; i++) {
+      var t = {};
+      t.title = 'Playlists ' + i;
+      t.id = i+1;
+      persistencejs.add(t);
+    }
     console.log('Doing login', $scope.loginData);
 
     // Simulate a login delay. Remove this and replace with your login
@@ -33,15 +39,16 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
+.controller('PlaylistsCtrl', function($scope,persistencejs) {
+  this.refresh = function(){ self.$apply(); }
+  persistencejs.fetchAll(function (error,playlists) {
+    if(error){
+      alert(error)
+    }
+    else{
+      $scope.playlists = playlists;
+    }
+  })
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
