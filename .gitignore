@@ -1,6 +1,18 @@
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
-node_modules/
 platforms/
+
+node_modules/
 plugins/
+.bower-*/
+.idea/
+
+www/lib/
+
+
+platforms/ios/build/
+platforms/ios/cordova/
+platforms/ios/CordovaLib/
+platforms/ios/Donler.xcodeproj/
+platforms/ios/Donler.xcodeproj/project.pbxproj
