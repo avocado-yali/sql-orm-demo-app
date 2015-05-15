@@ -1,15 +1,15 @@
 angular.module('starter.services', [])
 .service('persistencejs', function() {
-  persistence.store.websql.config(persistence, 'donler', 'todo database', 5*1024*1024);
+  // persistence.store.websql.config(persistence, 'donler', 'todo database', 5*1024*1024);
   
-  // persistence.store.cordovasql.config(
-  //   persistence,
-  //   'donler',
-  //   '0.0.1',                // DB version
-  //   'donler_db',          // DB display name
-  //   5 * 1024 * 1024,        // DB size
-  //   0                       // SQLitePlugin Background processing disabled
-  // );
+  persistence.store.cordovasql.config(
+    persistence,
+    'donler',
+    '1.0',                // DB version
+    'donler_db',          // DB display name
+    5 * 1024 * 1024,        // DB size
+    0                       // SQLitePlugin Background processing disabled
+  );
   var Playlists = persistence.define('Playlists', {
     title: "TEXT"
   });
